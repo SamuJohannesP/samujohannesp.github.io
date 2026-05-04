@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lahden Vappu 2026 - Aurinkoa ja Hulluttelua</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- YLÄPALKKI JA LOGO -->
+    <header class="top-bar">
+        <div class="logo-wrapper">
+            <svg class="vappu-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Ilmapallo 1 -->
+                <path d="M30 45c0-15 10-25 20-25s20 10 20 25c0 10-5 20-20 25-15-5-20-15-20-25z" fill="#ff007f" />
+                <path d="M50 70l-2 5h4l-2-5z" fill="#ff007f" />
+                <path d="M50 75c0 5-5 10-2 15" stroke="#ccc" fill="none" stroke-width="1.5" />
+                <!-- Ilmapallo 2 -->
+                <path d="M45 40c0-12 8-20 16-20s16 8 16 20c0 8-4 16-16 20-12-4-16-12-16-20z" fill="#ffd700" opacity="0.9" />
+                <path d="M61 60l-2 4h4l-2-4z" fill="#ffd700" />
+                <path d="M61 64c0 4-4 8-1 12" stroke="#ccc" fill="none" stroke-width="1.2" />
+            </svg>
+            <div class="logo-text">
+                <span class="logo-main">Lahden Vappu</span>
+                <span class="logo-year">2026</span>
+            </div>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="#vappuradio">Radio</a></li>
+                <li><a href="#opiskelijat">Opiskelijat</a></li>
+                <li><a href="#pikkuvesku">Pikkuvesku</a></li>
+                <li><a href="#tori">Tori</a></li>
+                <li><a href="#ilmoittaudu">Ilmoittaudu</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- CUSTOM VAPPU-RADIO -->
+        <section id="vappuradio">
+            <h2>Vappu-Radio</h2>
+            <div class="radio-card">
+                <div class="radio-info">
+                    <div class="radio-icon" id="radioIcon">🎵</div>
+                    <div>
+                        <span class="now-playing">Nyt soi:</span>
+                        <p class="track-name">Vappu-tunnari 2026 (AI Mix)</p>
+                    </div>
+                </div>
+                
+                <audio id="vappuAudio">
+                    <source src="media/vappu_tunnari.mp3" type="audio/mpeg">
+                </audio>
+
+                <div class="radio-controls">
+                    <button onclick="toggleAudio()" id="playBtn" class="custom-play-btn">TOISTA MUSIIKKI</button>
+                    <div class="visualizer" id="visualizer">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SISÄLTÖOSIOT -->
+        <section id="opiskelijat">
+            <h2>Opiskelijavappu</h2>
+            <div class="content-wrapper">
+                <p>Lahden opiskelijavappu on legendaarinen. Haalarikansa valtaa kadut, ja perinteinen patsaan lakitus kokoaa tuhannet juhlijat yhteen.</p>
+                <img src="media/opiskelijavappu.jpg" alt="Vappupalloja ja opiskelijoita" class="feature-img">
+            </div>
+        </section>
+
+        <section id="pikkuvesku">
+            <h2>Pikkuveskun Piknik</h2>
+            <div class="content-wrapper">
+                <p>Pikku-Vesijärvi on vappupäivän sydän. Alla näet tunnelmia suoraan puistosta!</p>
+                
+                <!-- Automaattisesti toistuva, mykistetty video -->
+                <video id="vappuVideo" autoplay muted loop playsinline poster="media/video_placeholder.jpg" class="ambient-video">
+                    <source src="media/vappu_video.mp4" type="video/mp4">
+                    Selaimesi ei tue videota.
+                </video>
+            </div>
+        </section>
+
+        <section id="tori">
+            <h2>Lahden Kauppatori</h2>
+            <div class="content-wrapper">
+                <p>Torilta löydät kaiken vappuun: kuumat munkit, värikkäät viuhkat ja iloisen markkinatunnelman.</p>
+                <img src="media/tori_vappu.jpg" alt="Lahden tori" class="feature-img">
+            </div>
+        </section>
+
+        <!-- LOMAKE -->
+        <section id="ilmoittaudu" class="form-section">
+            <h2>Ilmoittaudu Piknikille</h2>
+            <p>Täytä tiedot ja tule mukaan vuoden suurimpaan yhteispiknikkiin!</p>
+            <form id="vappuForm">
+                <div class="form-group">
+                    <label for="name">Nimi</label>
+                    <input type="text" id="name" placeholder="Nimesi tähän..." required>
+                </div>
+                <div class="form-group">
+                    <label for="food">Mitä tuot mukanasi?</label>
+                    <select id="food">
+                        <option value="simat">Simaa</option>
+                        <option value="munkit">Munkkeja</option>
+                        <option value="iloinen">Vain hyvää mieltä</option>
+                    </select>
+                </div>
+                <button type="submit" class="vappu-submit-btn">
+                    <span>LÄHDE MUKAAN! 🎈</span>
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Lahden Vappu</p>
+        <p class="ai-credits">Kuvat, videot ja musiikki on tuotettu tekoälyllä (Gemini, Suno, Runway).</p>
+    </footer>
+
+    <script>
+        const audio = document.getElementById('vappuAudio');
+        const btn = document.getElementById('playBtn');
+        const visualizer = document.getElementById('visualizer');
+        const icon = document.getElementById('radioIcon');
+        
+        // UUSI OSA: Videon pakotettu käynnistys
+        const video = document.getElementById('vappuVideo');
+
+        window.addEventListener('load', () => {
+            // Yritetään käynnistää video heti kun sivu on ladattu
+            video.play().catch(error => {
+                console.log("Automaattinen toisto estetty tai virhe:", error);
+                // Jos selain blokkaa videon, se yritetään käynnistää uudelleen heti kun käyttäjä klikkaa jotain
+                document.body.addEventListener('click', () => {
+                    video.play();
+                }, { once: true });
+            });
+        });
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                btn.innerText = "PYSÄYTÄ";
+                visualizer.classList.add('active');
+                icon.classList.add('spinning');
+            } else {
+                audio.pause();
+                btn.innerText = "TOISTA MUSIIKKI";
+                visualizer.classList.remove('active');
+                icon.classList.remove('spinning');
+            }
+        }
+    </script>
+
+</body>
+</html>
